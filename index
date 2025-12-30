@@ -191,9 +191,10 @@
     📝 ویرایش سفارشات 
   </button>
 
-  <button class="btn blue menu-btn" onclick="go('https://lookerstudio.google.com/reporting/0176f350-1193-42b6-a9b0-e0782cdcdf77/page/p_u4kjeca3xd')">
-    📅 داشبورد مدیریتی
-  </button>
+  <button class="btn blue menu-btn"
+  onclick="window.location.href='https://lookerstudio.google.com/reporting/0176f350-1193-42b6-a9b0-e0782cdcdf77/page/p_u4kjeca3xd'">
+  📊 داشبورد مدیریتی
+</button>
 
   
   <button class="btn danger" style="margin-top:25px;" onclick="logout()">
