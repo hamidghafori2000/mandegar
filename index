@@ -1,1 +1,277 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
+  <title>سامانه مدیریت ثبت سفارشات | شرکت دوخت و برش ماندگار</title>
+
+  <meta name="theme-color" content="#6f42c1" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+  <link rel="manifest" href="manifest.json" />
+
+  <!-- فونت فارسی -->
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet">
+
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Vazirmatn', sans-serif;
+    }
+    .clinic-btn {
+  background: #fff4d6;   /* زرد خیلی ملایم */
+  color: #000 !important;
+}
+.clinic-btn:hover {
+  background: #ffe9b0;
+}
+    body {
+      margin: 0;
+      background: linear-gradient(135deg, #6f42c1 0%, #f8f9fd 45%);
+      min-height: 100svh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .card {
+      width: 100%;
+      max-width: 420px;
+      background: #fff;
+      border-radius: 20px;
+      padding: 30px;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+      animation: cardIn 0.6s cubic-bezier(.25,.8,.25,1);
+    }
+
+    @keyframes cardIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px) scale(0.96);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+      }
+    }
+
+    .fade-out {
+      animation: cardOut 0.4s ease forwards;
+    }
+
+    @keyframes cardOut {
+      to {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.97);
+      }
+    }
+
+    h1, h2 {
+      margin-top: 0;
+      text-align: center;
+      color: #4b2c83;
+      font-weight: 600;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+      margin-bottom: 25px;
+    }
+
+    .field {
+      margin-bottom: 16px;
+      text-align: right;
+    }
+
+    .field label {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 6px;
+      color: #555;
+    }
+
+    .field input {
+      width: 100%;
+      padding: 13px 14px;
+      font-size: 15px;
+      border-radius: 12px;
+      border: 1px solid #ddd;
+    }
+
+    .field input:focus {
+      outline: none;
+      border-color: #6f42c1;
+      box-shadow: 0 0 0 2px rgba(111,66,193,0.15);
+    }
+
+    .btn {
+      width: 100%;
+      padding: 14px;
+      margin-top: 10px;
+      font-size: 15px;
+      border: none;
+      border-radius: 14px;
+      cursor: pointer;
+      color: #fff;
+      transition: transform 0.12s ease, box-shadow 0.12s ease;
+    }
+
+    .btn:active {
+      transform: scale(0.97);
+    }
+
+    .primary { background: #6f42c1; }
+    .green   { background: #28a745; }
+    .yellow  { background: #f0ad4e; color:#333; }
+    .blue    { background: #007bff; }
+    .gray    { background: #6c757d; }
+    .danger  { background: #dc3545; }
+
+    .menu-btn {
+      margin: 10px 0;
+    }
+
+    .error {
+      color: #dc3545;
+      font-size: 14px;
+      text-align: center;
+      margin-top: 12px;
+    }
+
+    .loader {
+      text-align: center;
+      font-size: 14px;
+      color: #777;
+      margin-top: 12px;
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- LOGIN -->
+<div id="loginBox" class="card">
+  <h2>🔐 ورود به سامانه</h2>
+  <p class="subtitle">سامانه مدیریت ثبت سفارشات<br>شرکت دوخت و برش ماندگار</p>
+
+  <div class="field">
+    <label>نام کاربری</label>
+    <input id="username" placeholder="نام کاربری" />
+  </div>
+
+  <div class="field">
+    <label>رمز عبور</label>
+    <input id="password" type="password" placeholder="••••••" />
+  </div>
+
+  <button class="btn primary" onclick="login()">ورود به سامانه</button>
+
+  <div id="loader" class="loader">در حال ورود...</div>
+  <div id="error" class="error"></div>
+</div>
+
+<!-- MENU -->
+<div id="menu" class="card" style="display:none;">
+  <h1>📋 سامانه مدیریت ثبت سفارشات</h1>
+  <p class="subtitle">شرکت دوخت و برش ماندگار </p>
+
+  <button class="btn green menu-btn" onclick="go('')">
+    ➕ ثبت سفارش جدید
+  </button>
+
+  <button class="btn yellow menu-btn" onclick="go('?mode=edit')">
+    📝 ویرایش سفارشات 
+  </button>
+
+  <button class="btn blue menu-btn" onclick="go('https://lookerstudio.google.com/reporting/0176f350-1193-42b6-a9b0-e0782cdcdf77/page/p_u4kjeca3xd')">
+    📅 داشبورد مدیریتی
+  </button>
+
+  
+  <button class="btn danger" style="margin-top:25px;" onclick="logout()">
+    خروج از سامانه
+  </button>
+</div>
+
+<script>
+  const USERS = [
+    { user: "admin", pass: "1234" },
+    { user: "staff", pass: "5678" }
+  ];
+
+  const BASE =
+    "https://script.google.com/macros/s/AKfycbyuiOuu3EAWwUez9t3r4yGTkoVG4VKT1WgHwgLBVPyXGI2XXoF_p9cssq6LxOed8Iak4A/exec";
+
+  const AUTO_LOGOUT_MINUTES = 10;
+
+  function login() {
+    const u = username.value.trim();
+    const p = password.value.trim();
+
+    const ok = USERS.find(x => x.user === u && x.pass === p);
+
+    if (!ok) {
+      error.innerText = "نام کاربری یا رمز عبور نادرست است";
+      return;
+    }
+
+    error.innerText = "";
+    loader.style.display = "block";
+
+    setTimeout(() => {
+      localStorage.setItem("loggedIn", "yes");
+      localStorage.setItem("loginTime", Date.now());
+
+      loginBox.classList.add("fade-out");
+
+      setTimeout(() => {
+        loginBox.style.display = "none";
+        menu.style.display = "block";
+      }, 400);
+
+    }, 900);
+  }
+
+  function logout() {
+    localStorage.clear();
+    location.reload();
+  }
+
+  function go(q) {
+    window.location.href = BASE + q;
+  }
+
+  function checkAutoLogout() {
+    const t = localStorage.getItem("loginTime");
+    if (!t) return;
+
+    const diff = (Date.now() - parseInt(t)) / 60000;
+    if (diff > AUTO_LOGOUT_MINUTES) {
+      logout();
+    }
+  }
+
+  setInterval(checkAutoLogout, 30000);
+
+  if (localStorage.getItem("loggedIn") === "yes") {
+    setTimeout(() => {
+      loginBox.style.display = "none";
+      menu.style.display = "block";
+    }, 300);
+  }
+
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
+</script>
+
+</body>
+</html>
