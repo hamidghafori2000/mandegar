@@ -6,155 +6,136 @@
 
   <title>سامانه مدیریت ثبت سفارشات | شرکت دوخت و برش ماندگار</title>
 
-  <meta name="theme-color" content="#6f42c1" />
+  <meta name="theme-color" content="#5e35b1" />
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-
   <link rel="manifest" href="manifest.json" />
-
-  <!-- فونت فارسی -->
-  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@400;600;700&display=swap" rel="stylesheet">
 
   <style>
-    * {
-      box-sizing: border-box;
-      font-family: 'Vazirmatn', sans-serif;
-    }
-    .clinic-btn {
-  background: #fff4d6;   /* زرد خیلی ملایم */
-  color: #000 !important;
-}
-.clinic-btn:hover {
-  background: #ffe9b0;
-}
+    * { box-sizing:border-box; font-family:'Vazirmatn',sans-serif; }
+
     body {
-      margin: 0;
-     background: linear-gradient(135deg, #0d6efd 0%, #f8f9fd 45%);
-      min-height: 100svh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #333;
-      user-select: none;
-      -webkit-user-select: none;
+      margin:0;
+      background:linear-gradient(145deg,#5e35b1 0%,#673ab7 35%,#ede7f6 100%);
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#333;
+      transition:background 1s ease;
     }
 
     .card {
-      width: 100%;
-      max-width: 420px;
-      background: #fff;
-      border-radius: 20px;
-      padding: 30px;
-      box-shadow: 0 20px 40px rgba(0,0,0,0.15);
-      animation: cardIn 0.6s cubic-bezier(.25,.8,.25,1);
+      width:100%;
+      max-width:430px;
+      background:#fff;
+      border-radius:24px;
+      padding:36px 30px;
+      box-shadow:0 25px 60px rgba(0,0,0,0.2);
+      animation:fadeIn .8s cubic-bezier(.25,.8,.25,1);
     }
 
-    @keyframes cardIn {
-      from {
-        opacity: 0;
-        transform: translateY(30px) scale(0.96);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-      }
+    @keyframes fadeIn {
+      from{opacity:0; transform:translateY(40px) scale(.96);}
+      to{opacity:1; transform:translateY(0) scale(1);}
     }
 
-    .fade-out {
-      animation: cardOut 0.4s ease forwards;
+    h1,h2 {
+      text-align:center;
+      color:#4527a0;
+      font-weight:700;
+      margin-top:0;
     }
 
-    @keyframes cardOut {
-      to {
-        opacity: 0;
-        transform: translateY(-20px) scale(0.97);
-      }
-    }
-
-    h1, h2 {
-      margin-top: 0;
-      text-align: center;
-      color: #4b2c83;
-      font-weight: 600;
-    }
-    h1 {
-      font-size: 22px;        /* کوچیک‌تر از پیش‌فرض */
-      white-space: nowrap;   /* جلوگیری از رفتن به خط بعد */
-    }
-
+    h2 { font-size:22px; }
     .subtitle {
-      text-align: center;
-      font-size: 14px;
-      color: #777;
-      margin-bottom: 25px;
+      text-align:center;
+      color:#666;
+      font-size:14px;
+      margin-bottom:25px;
+      line-height:1.6;
     }
 
     .field {
-      margin-bottom: 16px;
-      text-align: right;
+      margin-bottom:18px;
+      text-align:right;
     }
 
     .field label {
-      display: block;
-      font-size: 13px;
-      margin-bottom: 6px;
-      color: #555;
+      display:block;
+      font-size:13px;
+      color:#444;
+      margin-bottom:6px;
+      font-weight:500;
     }
 
     .field input {
-      width: 100%;
-      padding: 13px 14px;
-      font-size: 15px;
-      border-radius: 12px;
-      border: 1px solid #ddd;
+      width:100%;
+      padding:11px 13px;
+      border:1px solid #ccc;
+      border-radius:12px;
+      font-size:14px;
+      transition:.25s;
     }
 
     .field input:focus {
-      outline: none;
-      border-color: #6f42c1;
-      box-shadow: 0 0 0 2px rgba(111,66,193,0.15);
+      border-color:#673ab7;
+      box-shadow:0 0 6px rgba(103,58,183,0.2);
+      outline:none;
     }
 
     .btn {
-      width: 100%;
-      padding: 14px;
-      margin-top: 10px;
-      font-size: 15px;
-      border: none;
-      border-radius: 14px;
-      cursor: pointer;
-      color: #fff;
-      transition: transform 0.12s ease, box-shadow 0.12s ease;
+      width:100%;
+      padding:13px;
+      margin-top:10px;
+      font-size:15px;
+      border:none;
+      border-radius:14px;
+      cursor:pointer;
+      font-weight:600;
+      transition:all .2s ease;
     }
 
-    .btn:active {
-      transform: scale(0.97);
-    }
+    .btn:hover { transform:translateY(-2px); box-shadow:0 6px 14px rgba(0,0,0,.15); }
+    .btn:active { transform:scale(.98); }
 
-    .primary { background: #6f42c1; }
-    .green   { background: #28a745; }
-    .yellow  { background: #f0ad4e; color:#333; }
-    .blue    { background: #007bff; }
-    .gray    { background: #6c757d; }
-    .danger  { background: #dc3545; }
+    .primary { background:linear-gradient(135deg,#7e57c2,#512da8); color:#fff; }
+    .green   { background:linear-gradient(135deg,#43a047,#2e7d32); color:#fff; }
+    .yellow  { background:linear-gradient(135deg,#ffca28,#fbc02d); color:#333; }
+    .blue    { background:linear-gradient(135deg,#42a5f5,#1e88e5); color:#fff; }
+    .danger  { background:linear-gradient(135deg,#ef5350,#c62828); color:#fff; }
 
-    .menu-btn {
-      margin: 10px 0;
-    }
+    .menu-btn { margin:12px 0; }
 
     .error {
-      color: #dc3545;
-      font-size: 14px;
-      text-align: center;
-      margin-top: 12px;
+      color:#d32f2f;
+      font-size:13px;
+      text-align:center;
+      margin-top:10px;
+      font-weight:600;
     }
 
     .loader {
-      text-align: center;
-      font-size: 14px;
-      color: #777;
-      margin-top: 12px;
-      display: none;
+      text-align:center;
+      font-size:14px;
+      color:#777;
+      margin-top:12px;
+      display:none;
+    }
+
+    /* انیمیشن fade برای تعویض فرم‌ها */
+    .fade-out { animation:fadeOut .4s forwards; }
+    @keyframes fadeOut { to { opacity:0; transform:translateY(-20px) scale(.98);} }
+
+    /* آیکون‌های منو */
+    .btn span {
+      margin-left:6px;
+    }
+
+    @media(max-width:500px){
+      .card{padding:25px 20px;border-radius:20px;}
+      h1{font-size:18px;}
     }
   </style>
 </head>
@@ -185,24 +166,27 @@
 <!-- MENU -->
 <div id="menu" class="card" style="display:none;">
   <h1>📋 سامانه مدیریت ثبت سفارشات</h1>
-  <p class="subtitle">شرکت دوخت و برش ماندگار </p>
+  <p class="subtitle">شرکت دوخت و برش ماندگار</p>
 
   <button class="btn green menu-btn" onclick="go('')">
-    ➕ ثبت سفارش جدید
+    ➕ <span>ثبت سفارش جدید</span>
   </button>
 
   <button class="btn yellow menu-btn" onclick="go('?mode=edit')">
-    📝 ویرایش سفارشات 
+    📝 <span>ویرایش سفارشات</span>
   </button>
 
-  <button class="btn blue menu-btn"
-  onclick="window.location.href='https://lookerstudio.google.com/reporting/0176f350-1193-42b6-a9b0-e0782cdcdf77/page/p_u4kjeca3xd'">
-  📊 داشبورد مدیریتی
-</button>
+  <button class="btn blue menu-btn" onclick="go('?mode=orders_report')">
+    📑 <span>گزارشات مدیریتی</span>
+  </button>
 
-  
+  <button class="btn clinic-btn menu-btn"
+  onclick="window.location.href='https://lookerstudio.google.com/reporting/0176f350-1193-42b6-a9b0-e0782cdcdf77/page/p_u4kjeca3xd'">
+    📊 <span>داشبورد مدیریتی</span>
+  </button>
+
   <button class="btn danger" style="margin-top:25px;" onclick="logout()">
-    خروج از سامانه
+    🚪 <span>خروج از سامانه</span>
   </button>
 </div>
 
@@ -212,15 +196,12 @@
     { user: "staff", pass: "5678" }
   ];
 
-  const BASE =
-    "https://script.google.com/macros/s/AKfycby5_Dv9RmK8KAXoJp6AdbeK7IMh0Cik2382TbnJy4oS/dev";
-
+  const BASE = "https://script.google.com/macros/s/AKfycby5_Dv9RmK8KAXoJp6AdbeK7IMh0Cik2382TbnJy4oS/dev";
   const AUTO_LOGOUT_MINUTES = 10;
 
   function login() {
     const u = username.value.trim();
     const p = password.value.trim();
-
     const ok = USERS.find(x => x.user === u && x.pass === p);
 
     if (!ok) {
@@ -234,14 +215,12 @@
     setTimeout(() => {
       localStorage.setItem("loggedIn", "yes");
       localStorage.setItem("loginTime", Date.now());
-
       loginBox.classList.add("fade-out");
 
       setTimeout(() => {
         loginBox.style.display = "none";
         menu.style.display = "block";
       }, 400);
-
     }, 900);
   }
 
@@ -250,18 +229,13 @@
     location.reload();
   }
 
-  function go(q) {
-    window.location.href = BASE + q;
-  }
+  function go(q) { window.location.href = BASE + q; }
 
   function checkAutoLogout() {
     const t = localStorage.getItem("loginTime");
     if (!t) return;
-
     const diff = (Date.now() - parseInt(t)) / 60000;
-    if (diff > AUTO_LOGOUT_MINUTES) {
-      logout();
-    }
+    if (diff > AUTO_LOGOUT_MINUTES) logout();
   }
 
   setInterval(checkAutoLogout, 30000);
@@ -277,6 +251,5 @@
     navigator.serviceWorker.register("sw.js");
   }
 </script>
-
 </body>
 </html>
